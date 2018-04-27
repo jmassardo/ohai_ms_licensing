@@ -1,13 +1,13 @@
 Ohai.plugin :MSLicense do
   provides 'mslicense'
 
-  collect_data :windows do
+  collect_data :default do
     begin
       mslicense(Mash.new)
       cmd = shell_out('cscript %windir%\system32\slmgr.vbs -dlv')
       mslicense[:windowslicense] = Mash.new
       mslicense[:windowslicense][:keyManagementService] = Mash.new
-      
+
       if cmd.exitstatus == 0
         cmd.stdout.each_line() do |line|
           case line
@@ -48,7 +48,7 @@ Ohai.plugin :MSLicense do
           when /Trusted time/
             data = (line.split(':')).each(&:lstrip!)
             mslicense[:windowslicense]["trustedTime"] = ("#{data[1]}:#{data[2]}:#{data[3]}").chomp
-          
+
           # parse KMS client data
           when /Cient Machine ID/
             data = (line.split(':')).each(&:lstrip!)
