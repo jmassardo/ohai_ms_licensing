@@ -6,8 +6,3 @@
 #ohai_plugin 'microsoftlicense'
 
 ohai_plugin 'mslicensing'
-
-output="#{Chef::JSONCompat.to_json_pretty(node.to_hash)}"
-file 'c:\\chef\\node.json' do
-  content output
-end
