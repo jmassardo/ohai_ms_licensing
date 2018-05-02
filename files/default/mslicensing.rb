@@ -1,7 +1,7 @@
 Ohai.plugin :MSLicense do
   provides 'mslicense'
 
-  collect_data :default do
+  collect_data :windows do
     begin
       mslicense(Mash.new)
       cmd = shell_out('cscript %windir%\system32\slmgr.vbs -dlv')

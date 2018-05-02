@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe_ohai_plugin :MSLicense do
   let(:plugin_file) { 'files/default/mslicensing.rb' }
+  let(:platform) { 'windows' }
 
   it 'provides mslicense' do
     expect(plugin).to provides_attribute('mslicense')
